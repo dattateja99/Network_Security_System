@@ -1,29 +1,91 @@
-### Network Security Projects For Phising Data
+# 🛡️ Network Security Project for Phishing Data
 
-Setup github secrets:
-AWS_ACCESS_KEY_ID=
+An end-to-end **MLOps-enabled Network Security System** built to detect phishing activity using machine learning and automated deployment pipelines.  
+This project integrates **ETL pipelines**, **MLflow experiment tracking**, **GitHub Actions CI/CD**, **FastAPI model serving**, and **AWS Cloud Infrastructure** for scalable, reproducible security analytics.
 
-AWS_SECRET_ACCESS_KEY=
+---
 
-AWS_REGION = us-east-1
+## 🚀 Overview
 
-AWS_ECR_LOGIN_URI = 788614365622.dkr.ecr.us-east-1.amazonaws.com/networkssecurity
-ECR_REPOSITORY_NAME = networkssecurity
+The system automates every stage of a phishing detection workflow — from data ingestion and preprocessing to model training, versioning, deployment, and monitoring.
 
+**Key Features**
+- Automated ETL pipeline for cleaning and transforming phishing datasets.
+- Model training with MLflow experiment tracking and versioning.
+- CI/CD integration with GitHub Actions to trigger retraining and redeployment.
+- FastAPI microservice for real-time phishing detection.
+- Containerized deployment using Docker on AWS EC2.
+- Artifact and data storage managed through AWS S3.
+- Metadata and results stored in MongoDB for easy querying and analysis.
 
-Docker Setup In EC2 commands to be Executed
-#optinal
+---
 
-sudo apt-get update -y
+## 🧠 Tech Stack
 
-sudo apt-get upgrade
+| Component | Technology |
+|------------|-------------|
+| **ETL & ML** | Python, Pandas, Scikit-learn |
+| **MLOps & Tracking** | MLflow, DagsHub |
+| **CI/CD** | GitHub Actions |
+| **Deployment** | FastAPI, Docker, AWS EC2 |
+| **Storage** | AWS S3 (artifacts), MongoDB (metadata) |
 
-#required
+---
 
-curl -fsSL https://get.docker.com -o get-docker.sh
+## ⚙️ Architecture
+    +-------------------+
+    |    Phishing Data  |
+    +---------+---------+
+              |
+              v
+    +-------------------+
+    |   ETL Pipeline    |  --> Cleaned data to S3
+    +-------------------+
+              |
+              v
+    +-------------------+
+    |  Model Training   |  --> MLflow logs, metrics
+    +-------------------+
+              |
+              v
+    +-------------------+
+    |  GitHub Actions   |  --> CI/CD automation
+    +-------------------+
+              |
+              v
+    +-------------------+
+    |   Docker Image    |
+    |   (FastAPI App)   |
+    +-------------------+
+              |
+              v
+    +-------------------+
+    |  AWS EC2 Hosting  |
+    |  & MongoDB Store  |
+    +-------------------+
+---
 
-sudo sh get-docker.sh
+## 🧩 Key Components
 
-sudo usermod -aG docker ubuntu
+### 1. **ETL Pipeline**
+Automates extraction, cleaning, and transformation of phishing datasets before feature engineering and model training.  
+The processed data is stored in AWS S3 and version-controlled for reproducibility.
 
-newgrp docker
+### 2. **Model Training & MLflow**
+Tracks experiments, hyperparameters, and metrics using MLflow.  
+Best-performing models are automatically logged and registered for deployment.
+
+### 3. **CI/CD with GitHub Actions**
+Automates:
+- Model retraining on new data commits  
+- Docker image builds and pushes  
+- FastAPI app deployment to EC2  
+
+### 4. **FastAPI Inference Service**
+Exposes a `/predict` endpoint for real-time phishing URL classification.
+
+### 5. **Monitoring**
+Metrics such as request latency and prediction drift are logged to MLflow and MongoDB.  
+System health and performance are monitored using AWS tools.
+
+---
